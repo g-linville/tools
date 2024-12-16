@@ -13,7 +13,7 @@ Params: website: (optional) The HTTPS URL of the website to visit. If unspecifie
 Params: tabID: (optional) The ID of the tab. If unspecified, a new tab will be created.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 
-#!http://service.daemon.gptscript.local/getPageContents
+#!https://service.daemon.gptscript.local/getPageContents
 
 ---
 Name: Browse
@@ -25,7 +25,7 @@ Params: website: (required) The URL of the website to visit. Must be an HTTPS UR
 Params: tabID: (optional) The ID of the tab. If unspecified, a new tab will be created, and its ID will be returned.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 
-#!http://service.daemon.gptscript.local/browse
+#!https://service.daemon.gptscript.local/browse
 
 
 ---
@@ -38,7 +38,7 @@ Params: filter: (required) the class (eg. '.foo') or id (eg. '#foo') of an objec
 Params: tabID: (required) The ID of the tab to filter contents of.
 Tools: service
 
-#!http://service.daemon.gptscript.local/getFilteredContent
+#!https://service.daemon.gptscript.local/getFilteredContent
 
 ---
 Name: Fill
@@ -54,7 +54,7 @@ Params: tabID: (required) The ID of the tab.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 Tools: service
 
-#!http://service.daemon.gptscript.local/fill
+#!https://service.daemon.gptscript.local/fill
 
 ---
 Name: Enter
@@ -66,7 +66,7 @@ Params: tabID: (required) The ID of the tab.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 Tools: service
 
-#!http://service.daemon.gptscript.local/enter
+#!https://service.daemon.gptscript.local/enter
 
 ---
 Name: Scroll
@@ -78,7 +78,7 @@ Params: tabID: (required) The ID of the tab.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 Tools: service
 
-#!http://service.daemon.gptscript.local/scrollToBottom
+#!https://service.daemon.gptscript.local/scrollToBottom
 
 ---
 Name: Screenshot
@@ -89,7 +89,7 @@ Description: Take a screenshot of the given tabID
 Params: tabID: (required) The ID of the tab.
 Params: fullPage: (optional) Take a full page screenshot. Defaults to false, which takes a screenshot of the current viewport.
 
-#!http://service.daemon.gptscript.local/screenshot
+#!https://service.daemon.gptscript.local/screenshot
 
 ---
 Name: Back
@@ -101,7 +101,7 @@ Params: tabID: (required) The ID of the tab.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 Tools: service
 
-#!http://service.daemon.gptscript.local/back
+#!https://service.daemon.gptscript.local/back
 
 ---
 Name: Forward
@@ -112,7 +112,7 @@ Params: tabID: (required) The ID of the tab.
 Params: followMode: (optional) If true, the tool will produce a screenshot of the final page state. Defaults to false.
 Tools: service
 
-#!http://service.daemon.gptscript.local/forward
+#!https://service.daemon.gptscript.local/forward
 
 ---
 Name: Browser Context

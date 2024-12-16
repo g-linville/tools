@@ -8,6 +8,7 @@ import {scrollToBottom} from "./scrollToBottom.ts"
 import {randomBytes} from "node:crypto"
 import {getSessionId, SessionManager} from "./session.ts"
 import {screenshot, ScreenshotInfo} from "./screenshot.ts"
+import {createServer, startServer} from "@gptscript-ai/gptscript"
 
 async function main (): Promise<void> {
   console.log('Starting browser server')
@@ -118,10 +119,8 @@ async function main (): Promise<void> {
     }
   })
 
-  // Start the server
-  const server = app.listen(port, "127.0.0.1", () => {
-    console.log(`Server is listening on port ${port}`)
-  })
+  const server = createServer(app)
+  startServer(server)
 
   // stdin is used as a keep-alive mechanism. When the parent process dies the stdin will be closed and this process
   // will exit.

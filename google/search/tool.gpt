@@ -13,7 +13,7 @@ Tools: service
 Args: maxResults: The maximum number of search results to gather relevant information from (optional, default 3)
 Args: query: A question, statement, or topic to search with (required)
 
-#!http://service.daemon.gptscript.local/search
+#!https://service.daemon.gptscript.local/search
 
 ---
 Name: service

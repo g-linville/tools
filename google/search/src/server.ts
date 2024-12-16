@@ -3,6 +3,7 @@ import { getSessionId, SessionManager } from './session.ts'
 import express, { type Request, type Response, type RequestHandler } from 'express'
 import { search } from './search.ts'
 import { refine } from './refine.ts'
+import {createServer, startServer} from "@gptscript-ai/gptscript"
 
 async function main (): Promise<void> {
   const app = express()
@@ -11,11 +12,6 @@ async function main (): Promise<void> {
   const port = parseInt(process.env.PORT ?? "9888", 10)
   delete (process.env.GPTSCRIPT_INPUT)
   app.use(bodyParser.json())
-
-  // Start the server
-  const server = app.listen(port, "127.0.0.1", () => {
-    console.log(`Server is listening on port ${port}`)
-  })
 
   const sessionManager = await SessionManager.create()
 
@@ -63,6 +59,10 @@ async function main (): Promise<void> {
       res.end()
     }
   }) as RequestHandler)
+
+  // Start the server
+  const server = createServer(app)
+  startServer(server)
 
   let stopped = false
   const stop = (): void => {

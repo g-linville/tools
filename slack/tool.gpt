@@ -1,0 +1,217 @@
+---
+Name: Slack
+Description: Tools for interacting with Slack
+Metadata: bundle: true
+Share Tools: List Channels, Search Channels, Get Channel History, Get Channel History by Time, Get Thread History, Search Messages, Send Message, Send Message in Thread, List Users, Search Users, Send DM, Send DM in Thread, Get Message Link, Get DM History, Get DM Thread History
+
+---
+Name: List Channels
+Description: List all channels in the Slack workspace. Returns the name and ID for each channel
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js listChannels
+
+---
+Name: Search Channels
+Description: Search for channels in the Slack workspace
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Param: query: the search query
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js searchChannels
+
+---
+Name: Get Channel History
+Description: Get the chat history for a channel in the Slack workspace
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Share Tools: List Channels, Search Channels
+Param: channelid: the ID of the channel to get the history for
+Param: limit: the number of messages to return - recommend starting with 10 and increasing if necessary
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getChannelHistory
+
+---
+Name: Get Channel History by Time
+Description: Get the chat history for a channel in the Slack workspace within a specific time range
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Share Tools: List Channels, Search Channels
+Param: channelid: the ID of the channel to get the history for
+Param: limit: the maximum number of messages to return - recommend starting with 10 and increasing if necessary
+Param: start: the start time in RFC 3339 format
+Param: end: the end time in RFC 3339 format
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getChannelHistoryByTime
+
+---
+Name: Get Thread History
+Description: Get the chat history for a particular thread
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Share Tools: List Channels, Get Channel History, Search Messages
+Param: channelid: the ID of the channel containing the thread
+Param: threadid: the ID of the thread to get the history for
+Param: limit: the number of messages to return
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getThreadHistory
+
+---
+Name: Search Messages
+Description: Search for messages in the Slack workspace
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Param: query: the search query
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js searchMessages
+
+---
+Name: Send Message
+Description: Send a message to a channel in the Slack workspace
+Share Context: Slack Context
+Credential: ./credential
+Share Tools: List Channels, Search Channels
+Param: channelid: the ID of the channel to send the message to
+Param: text: the text to send
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js sendMessage
+
+---
+Name: Send Message in Thread
+Description: Send a message in a thread in the Slack workspace
+Share Context: Slack Context
+Credential: ./credential
+Share Tools: List Channels, Search Channels, Get Channel History, Search Messages
+Param: channelid: the ID of the channel containing the thread
+Param: threadid: the ID of the thread to send the message to
+Param: text: the text to send
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js sendMessageInThread
+
+---
+Name: List Users
+Description: List all users in the Slack workspace.
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js listUsers
+
+---
+Name: Search Users
+Description: Search for users in the Slack workspace
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Param: query: the search query
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js searchUsers
+
+---
+Name: Send DM
+Description: Send a direct message to a user.
+Share Context: Slack Context
+Credential: ./credential
+Share Tools: List Users, Search Users
+Param: userids: comma-separated list of user IDs to send the message to for a group message (example: USER1ID,USER2ID), or just one ID for an individual message
+Param: text: the text to send
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js sendDM
+
+---
+Name: Send DM in Thread
+Description: Send a message in a thread in a direct message conversation
+Share Context: Slack Context
+Credential: ./credential
+Share Tools: List Users, Search Users, Get DM History
+Param: userids: comma-separated list of user IDs for the conversation (example: USER1ID,USER2ID), or just one ID for an individual conversation
+Param: threadid: the ID of the thread to send the message to
+Param: text: the text to send
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js sendDMInThread
+
+---
+Name: Get Message Link
+Description: Get the permalink for a message
+Share Context: Slack Context
+Credential: ./credential
+Share Tools: List Channels, Search Channels, Search Messages
+Param: channelid: the ID of the channel containing the message
+Param: messageid: the ID of the message
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getMessageLink
+
+---
+Name: Get DM History
+Description: Get the chat history for a direct message conversation
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Share Tools: List Users, Search Users
+Param: userids: comma-separated list of user IDs for the conversation (example: USER1ID,USER2ID), or just one ID for an individual conversation
+Param: limit: the number of messages to return
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getDMHistory
+
+---
+Name: Get DM Thread History
+Description: Get the chat history for a thread in a direct message conversation
+Share Context: Slack Context
+Tools: github.com/gptscript-ai/datasets/filter
+Credential: ./credential
+Share Tools: List Users, Search Users, Get DM History
+Param: userids: comma-separated list of user IDs for the conversation (example: USER1ID,USER2ID), or just one ID for an individual conversation
+Param: threadid: the ID of the thread to get the history for
+Param: limit: the number of messages to return
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js getDMThreadHistory
+
+---
+Name: User Context
+Description: Get information about the logged in user and default time zone.
+Credential: ./credential
+
+#!/usr/bin/env node ${GPTSCRIPT_TOOL_DIR}/index.js userContext
+
+---
+Name: Slack Context
+Type: context
+Share Context: ../time
+Share Tools: User Context
+
+#!sys.echo
+
+## Instructions for using Slack tools
+
+You have access to a set of tools to interact with a Slack workspace.
+
+Wait to call the User Context tool until the user asks you something about Slack. Always call this tool before calling any other Slack tools.
+
+When mentioning a user in a message you create, use the format <@USERID>, including the angle brackets.
+The user ID can be obtained from the List Users or Search Users tool.
+
+Do not provide channel, thread, or message IDs in the output, as these are not helpful for the user.
+When you use the search_messages tool, you can use normal Slack search filters. If you filter by user, use the full username, which can be obtained from the list_users or search_users tools.
+
+Display all dates and times in the user's preferred timezone. When the user gives values for dates and times, assume they are in the user's preferred timezone unless otherwise specified by the user.
+
+## End of instructions for using Slack tools
+
+---
+!metadata:*:category
+Slack
+
+---
+!metadata:*:icon
+/admin/assets/slack_icon_small.svg
+
+---
+!metadata:*:oauth
+slack

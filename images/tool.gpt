@@ -1,0 +1,70 @@
+---
+Name: Images
+Metadata: bundle: true
+Description: Tools for analyzing and generating images
+Share Tools: Analyze Images, Generate Images
+
+---
+Name: Analyze Images
+Description: Analyze images using a given prompt and return relevant information about the images
+Credential: github.com/gptscript-ai/credentials/model-provider
+Metadata: noUserAuth: sys.model.provider.credential
+Share Context: Analyze Images Context
+Param: prompt: (optional) A prompt to analyze the images with (defaults "Provide a brief description of each image")
+Param: images: (required) A JSON array containing one or more URLs or file paths of images to analyze. Only supports jpeg, png, and webp.
+
+#!/usr/bin/env npm --silent --prefix ${GPTSCRIPT_TOOL_DIR} run tool -- analyzeImages
+
+---
+Name: Generate Images
+Description: Generate images based on a given prompt
+Credential: github.com/gptscript-ai/credentials/model-provider
+Metadata: noUserAuth: sys.model.provider.credential
+Share Context: Generate Images Context
+Param: prompt: (required) Text describing the images to generate
+Param: size: (optional) Dimensions of the images to generate in. One of [1024x1024, 256x256, 512x512, 1792x1024, 1024x1792] (default 1024x1024)
+Param: quality: (optional) Quality of the generated image. One of [standard, hd] (default standard)
+Param: quantity: (optional) Quantity of distinct images to generate (default 1, max 10)
+
+#!/usr/bin/env npm --silent --prefix ${GPTSCRIPT_TOOL_DIR} run tool -- generateImages
+
+---
+Name: Generate Images Context
+Type: context
+
+#!sys.echo
+
+# START INSTRUCTIONS: Generate Images tool
+
+The Generate Images tool returns JSON containing the `workspaceFilePath` and `downloadUrl` of every image it generates.
+Always use the `downloadUrl` of a generated image when embedding it in markdown.
+Unless otherwise specified, always display the images you generate in embedded markdown after generating them.
+Never provide the `downloadUrl` to the user as a clickable link.
+
+# END INSTRUCTIONS: Generate Images tool
+
+---
+Name: Analyze Images Context
+Type: context
+
+#!sys.echo
+
+# START INSTRUCTIONS: Analyze Images tool
+
+Use the Analyze Images tool to whenever you need to inspect, compare, or answer questions about the contents of images.
+
+You can pass multiple images to the Analyze Images tool at once using a single call.
+
+When calling the Analyze Images tool, always provide a JSON array containing one or more URLs or workspace file paths for the `images` argument, even if you are only analyzing a single image.
+e.g. Analyzing a single image: ["https://example.com/image2.png"]
+e.g. Analyzing multiple images: ["https://example.com/image1.webp", "cool.jpg", "cow.webp", "generated_image_defg1234.png", "https://example.com/image2.png"]
+
+# END INSTRUCTIONS: Analyze Images tool
+
+---
+!metadata:*:category
+Images
+
+---
+!metadata:*:icon
+https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/image-duotone.svg

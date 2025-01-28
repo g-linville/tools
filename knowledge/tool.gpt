@@ -1,0 +1,47 @@
+Name: Knowledge
+Description: Obtain search result from the knowledge set
+Credential: github.com/gptscript-ai/credentials/model-provider
+Credential: ../existing-credential as knowledge
+Output Filter: ../result-formatter
+Share Context: context
+Params: Query: A search query that will be evaluated against the knowledge set
+Metadata: category: Capability
+Metadata: icon: https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/brain-duotone.svg
+Metadata: noUserAuth: sys.model.provider.credential,knowledge
+
+#!${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool retrieve --flows-file=blueprint:obot "${QUERY}"
+
+---
+Name: context
+Type: context
+
+#!/bin/bash
+
+if [ -n "${KNOWLEDGE_SUMMARY}" ]; then
+  cat <<EOF
+START INSTRUCTIONS: KNOWLEDGE SUMMARY
+
+Below is a JSON document describing some of the knowledge that is available in your knowledge set. Truncated content
+is indicated with by the field 'partial: true' in which only the first 3000 characters of the document are shown.
+The rest of the document can be queried by using the knowledge tool to query the knowledge set:
+
+${KNOWLEDGE_SUMMARY}
+
+END INSTRUCTIONS: KNOWLEDGE SUMMARY
+EOF
+fi
+
+if [ -z "${KNOW_DATASETS}" ]; then
+  exit 0
+else
+  cat <<EOF
+START INSTRUCTIONS: KNOWLEDGE
+
+Use the tool knowledge to query your knowledge set to assist in Retrieval-Augmented Generation (RAG).
+The knowledge set contains data described as:
+
+${KNOW_DATASET_DESCRIPTION}
+
+END INSTRUCTIONS: KNOWLEDGE
+EOF
+fi

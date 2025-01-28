@@ -1,0 +1,20 @@
+---
+Name: Database
+Description: Tools for interacting with a database
+Metadata: category: Capability
+Metadata: icon: https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/database-duotone.svg
+Share Tools: Run Database Command
+
+---
+Name: Run Database Command
+Share Context: Database Context
+Description: Run the sqlite3 command with the given arguments against the SQLite database and print the results
+Param: sqlite3_args: Arguments to pass to the sqlite3 cli
+
+#!${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool runDatabaseCommand
+
+---
+Name: Database Context
+Type: context
+
+#!${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool databaseContext

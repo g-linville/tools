@@ -1,0 +1,55 @@
+---
+Name: Time
+Description: Context tools that expose information about the current time, date, and timezone for the user.
+Share Contexts: Current Date and Time, User Timezone
+
+---
+Name: Current Date and Time
+Description: Context that provides the current date and time in ISO 8601 format.
+Type: context
+
+#!python3
+
+import os
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+# Retrieve the timezone or use 'UTC' as a default
+obot_user_timezone = os.getenv('OBOT_USER_TIMEZONE', 'UTC').strip()
+
+try:
+    timezone = ZoneInfo(obot_user_timezone)
+except ValueError:
+    # Invalid timezone, fallback to UTC
+    timezone = ZoneInfo('UTC')
+
+print(f"The current local date and time for the user is {datetime.now(timezone).isoformat()}.")
+
+---
+Name: User Timezone
+Description: Context that provides the IANA Time Zone ID for the user's preferred time zone.
+Type: context
+
+#!python3
+
+import os
+from zoneinfo import ZoneInfo
+
+# Retrieve the timezone or use 'UTC' as a default
+obot_user_timezone = os.getenv('OBOT_USER_TIMEZONE', 'UTC').strip()
+
+try:
+    timezone = ZoneInfo(obot_user_timezone)
+except ValueError:
+    # Invalid timezone, fallback to UTC
+    timezone = ZoneInfo('UTC')
+
+print(f"The user's preferred time zone is {timezone.key}.")
+
+---
+!metadata:*:category
+Utilities
+
+---
+!metadata:*:icon
+https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2/assets/duotone/hourglass-duotone.svg

@@ -1,0 +1,5 @@
+Name: Obot
+Description: Model provider for Obot
+Model Provider: true
+
+#!sys.daemon ${GPTSCRIPT_TOOL_DIR}/bin/gptscript-go-tool

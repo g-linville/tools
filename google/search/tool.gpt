@@ -1,0 +1,34 @@
+---
+Name: Google Search
+Metadata: bundle: true
+Description: Tools for using Google Search
+Share Tools: Search
+
+---
+Name: Search
+Description: Search Google with a given query and return relevant information from the search results. Search with more maxResults if you need more information.
+JSON Response: true
+Share Context: Current Date and Time from ../../time
+Tools: service
+Args: query: A question, statement, or topic to search with (required)
+Args: maxResults: The maximum number of search results to gather relevant information from (optional, default 3, minimum 2)
+
+#!http://service.daemon.gptscript.local/search
+
+---
+Name: service
+Metadata: index: false
+
+#!sys.daemon /usr/bin/env npm --prefix ${GPTSCRIPT_TOOL_DIR} run server
+
+---
+!metadata:*:category
+Google Search
+
+---
+!metadata:*:icon
+/admin/assets/google_icon_small.png
+
+---
+!metadata:*:oauth
+google

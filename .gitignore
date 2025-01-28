@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+**/*.swp
+**/venv
+**/bin
+**/node_modules
+*__pycache__
+**/vendor
+Pipfile*
